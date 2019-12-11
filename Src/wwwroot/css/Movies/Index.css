@@ -1,0 +1,16 @@
+.movie-info_title{
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+.movie-item{
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.movie-poster{
+    width:100%;
+    min-height: 377px;
+}
+

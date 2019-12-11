@@ -1,0 +1,28 @@
+@page
+@model MovieTheater.Pages.Staff.MoviesModel
+
+@{
+    ViewData["Title"] = "Staff";
+}
+<link rel="stylesheet" href="~/css/Movies/Index.css" type="text/css" />
+<link rel="stylesheet" href="~/css/common.css" type="text/css" />
+
+<h1>Phim Đang Chiếu</h1>
+<hr class="title-hr">
+
+
+<div class="row">
+    @foreach (var item in Model.Movie) {
+        <div class="col-3 movie-item">  
+            <img src="../Picture/@item.Poster" class="movie-poster">
+            <div class="movie-info">    
+                <div class="movie-info_title" style="margin-top:10px">    
+                    @Html.DisplayFor(modelItem => item.Title)
+                </div>
+                <a asp-page="./Showtimes" class="btn btn-primary float-right" asp-route-movieSearch="@item.Title">Xem Lịch chiếu</a>
+            </div>
+        </div>
+    }
+</div>
+
+

@@ -1,0 +1,25 @@
+.title-hr{
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 3px solid rgba(0,0,0,.1);
+    background-color: black;
+}
+.float-rigth{
+    float:right;
+}
+/*Dropdowm menu*/
+.dropdown > .dropdown-menu {
+    top: 200%;
+    transition: 0.3s all ease-in-out;
+  }
+  .dropdown:hover > .dropdown-menu {
+    display: block;
+    top: 100%;
+  }
+  
+  .dropdown > .dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+      pointer-events: none;
+  }
+  

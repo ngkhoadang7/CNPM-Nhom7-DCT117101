@@ -1,0 +1,107 @@
+@page
+@model MovieTheater.Pages.Movies.DetailsModel
+@using Microsoft.AspNetCore.Identity
+@using MovieTheater.Models
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    ViewData["Title"] = "Movie";
+}
+<link rel="stylesheet" href="~/css/Movies/Detail.css" type="text/css" />
+<link rel="stylesheet" href="~/css/common.css" type="text/css" />
+
+<h2>Nội dung phim</h2>
+ <hr class="title-hr">
+<div>
+    <dl class="row">
+        <div class="col-sm-3">
+            <img src="/Picture/@Html.DisplayFor(model => model.Movie.Poster)" style="width:100%; height:100%">
+        </div>
+        <div class="col-sm-9">
+            <h4>
+                @Html.DisplayFor(model => model.Movie.Title)
+            </h4>
+            <hr/>
+            <div style="display:flex">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Movie.Director):
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Movie.Director)
+                </dd>
+            </div>
+            <div style="display:flex">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Movie.Cast):
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Movie.Cast)
+                </dd>
+            </div>
+            <div style="display:flex">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Movie.Genre):
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Movie.Genre)
+                </dd>
+            </div>
+            <div style="display:flex">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Movie.ReleaseDate):
+                </dt>
+                <dd>
+                    @Model.getDate(Model.Movie)
+                </dd>
+            </div>
+            <div style="display:flex">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Movie.Duration):
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Movie.Duration) phút
+                </dd>
+            </div>
+            <div style="display:flex">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Movie.Language):
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Movie.Language)
+                </dd>
+            </div>
+            <div style="display:flex">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Movie.Rated):
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Movie.Rated)
+                </dd>
+            </div>
+            <div style="display:flex">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Movie.Summary):
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Movie.Summary)
+                </dd>
+            </div>
+            <a asp-page="../Showtimes/Index" class="btn btn-primary float-right" asp-route-MovieID="@Model.Movie.ID">Xem lịch chiếu</a> 
+        </div>
+        
+    </dl>
+</div>
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-page="./Manage">Quay lại danh sách phim</a>
+    </div>
+}
+else
+{
+    <div>
+        <a asp-page="./Index">Quay lại danh sách phim</a>
+    </div>
+}

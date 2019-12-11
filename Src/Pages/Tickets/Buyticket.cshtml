@@ -1,0 +1,77 @@
+@page
+@model MovieTheater.Pages.Tickets.BuyticketModel
+
+@{
+    ViewData["Title"] = "Ticket";
+}
+<link href="~/css/Tickets/Buyticket.css" rel="stylesheet" type="text/css" />
+<link href="~/css/common.css" rel="stylesheet" type="text/css" />
+<script src="~/js/Tickets/Buyticket.js" type="text/javascript"></script>
+
+
+<h1>Đặt vé</h1>
+<hr class="title-hr"/>
+
+<form method="post">
+    <div class="row">
+        <div class="col-sm-4">
+        @foreach (var item in Model.Showtime)
+        {
+            <div class="showtime-poster">
+                <img src="/Picture/@item.Movie.Poster" style="width:100%;">
+            </div>
+            <input type="hidden"  asp-for="Ticket.ShowtimeID" value="@item.ID"/>
+            <div class="showtime-info">
+                <div class="showtime-info_lable">Phim:</div>
+                <div class="showtime-info_content">@Html.DisplayFor(modelItem => item.Movie.Title) </div>
+            </div>
+            <div class="showtime-info">
+                <div class="showtime-info_lable">Phòng chiếu:</div>
+                <div class="showtime-info_content">@Html.DisplayFor(modelItem => item.Theater.Name)</div>
+            </div>
+            <div class="showtime-info">
+                <input type="hidden" id="theater-format" asp-for="Ticket.Showtime.Format" value="@item.Format"/>
+                <div class="showtime-info_lable">Định dạng:</div>
+                <div class="showtime-info_content">@Html.DisplayFor(modelItem => item.Format)</div>
+            </div>
+            <div class="showtime-info">
+                <div class="showtime-info_lable">Suất phim:</div>
+                <div class="showtime-info_content">@Model.getStartTimeFormatted(item)</div>
+            </div>
+            <div class="showtime-info">
+                <div class="showtime-info_lable">Ghế đã chọn:</div>
+                <div class="showtime-info_content" id="seatsSelected"></div>
+            </div>
+            <div class="showtime-info">
+                <div class="showtime-info_lable">Tổng tiền:</div>
+                <div class="showtime-info_content" id="totalPrice"></div>
+            </div>
+        }
+        </div>
+        
+        <div class="col-sm-8" style="position:relative">
+            <b>Chọn ghế</b>
+            <hr/>
+            <div style="margin-bottom:2em; overflow:hidden">
+                <img src="/Picture/bg-screen.png" class="screen-pic"> 
+                <div style="width:80%; margin:auto">
+                @{
+                    for (var i = 1 ; i <= Model.Showtime[0].Theater.NoSeat ; i++) 
+                    {
+                        @:<div style="width:10%; float:left">
+                                <input type="checkbox"
+                                    name="selectedSeats"
+                                    value="@i"
+                                    onclick="UpdateSeatAndPrice()"
+                                    @(Html.Raw(Model.SeatIsBooked(@i) ? "checked=\"checked\" disabled" : "")) />
+                                    @i
+                        @:</div>
+                    }
+                }
+                </div>
+            </div>
+            <input type="submit" value="Xác nhận" class="btn btn-primary float-right" />
+        </div>
+    </div>
+</form>
+</div>

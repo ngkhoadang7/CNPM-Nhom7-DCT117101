@@ -1,0 +1,85 @@
+migrationBuilder.Sql(@"
+	            CREATE TRIGGER UpdateNumberOfBookedSeat
+                AFTER INSERT ON Ticket
+                BEGIN
+                    UPDATE Showtime
+                    SET NoSeatBooked = NoSeatBooked + 1
+                    WHERE ID = NEW.ShowtimeID;
+                END
+                ");
+
+-- Dựng Suất chiếu cho phim đã ngừng chiếu
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(2,6,'2019-12-11 19:00:00',0,'4DX');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(2,3,'2019-12-14 09:00:00',0,'2D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(2,2,'2019-12-15 14:00:00',0,'2D');
+
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(1,2,'2019-12-12 17:30:00',0,'2D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(1,5,'2019-12-13 17:30:00',0,'3D');
+
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(3,1,'2019-12-13 14:45:00',0,'2D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(3,2,'2019-12-14 09:30:00',0,'2D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(3,3,'2019-12-17 17:45:00',0,'2D');
+
+-- Thêm phim đang chiếu 
+INSERT INTO Movie(Poster,Title,Director,Cast,Genre,ReleaseDate,Duration,Language,Rated,Summary,Showing) 
+VALUES('M05.jpg','ANH TRAI YÊU QUÁI','Vũ Ngọc Phượng','Kiều Minh Tuấn, Isaac, Diệu Nhi, Phi Phụng...','Gia đình, Hài, Tâm Lý','2019-11-29 00:00:00',109,'Tiếng Việt - Phụ đề Tiếng Anh','C13','Lâm là một vận động viên Judo quốc gia bỗng chốc phải bỏ dở sự nghiệp vì gặp chấn thương mất đi thị giác. Phong - người anh cùng cha khác mẹ đang ở trong tù - ngay lập tức lợi dụng bi kịch của em trai để xin được ân xá về nhà chăm sóc em. Chưa thể chấp nhận sự thật mình sẽ bị mù vĩnh viễn, Lâm càng phát điên khi ông anh 10 năm không gặp bỗng dưng trở về, mang theo toàn phiền toái. Cuộc đoàn tụ không mong muốn đẩy hai anh em Phong và Lâm vào những tình huống bi hài, khi vừa phải chịu đựng tật xấu của nhau, vừa tìm cách giải quyết những mâu thuẫn trong quá khứ.',1);
+
+INSERT INTO Movie(Poster,Title,Director,Cast,Genre,ReleaseDate,Duration,Language,Rated,Summary,Showing) 
+VALUES('M06.jpg','NỮ HOÀNG BĂNG GIÁ 2','Chris Buck, Jennifer Lee','Evan Rachel Wood, Kristen Bell, Jonathan Groff','Hài, Hoạt Hình, Phiêu Lưu','2019-11-22 00:00:00',103,'Tiếng Anh - Phụ đề Tiếng Việt; Lồng tiếng','P','Cùng dấn thân vào một cuộc phiêu lưu xa xôi thú vị, hai chị em Anna và Elsa đi đến chốn rừng sâu để tìm kiếm sự thật về bí ẩn cổ xưa của vương quốc mình. Tất cả những gì Anna & Elsa biết về bản thân, lịch sử và gia đình của họ đều bị thử thách khi họ bị cuốn vào một chuyến đi đầy quả cảm đến với vùng đất phía bắc bí ẩn ngoài Arendelle được báo trước.',1);
+
+INSERT INTO Movie(Poster,Title,Director,Cast,Genre,ReleaseDate,Duration,Language,Rated,Summary,Showing) 
+VALUES('M07.jpg','GIÁNG SINH NĂM ẤY','Paul Feig','Emilia Clarke, Henry Golding, Michelle Yeoh, Emma Thompson','Hài, Tâm Lý, Tình cảm','2019-12-06 00:00:00',113,'Tiếng Anh - Phụ đề Tiếng Việt','C13','Last Christmas là câu chuyện tình yêu cảm động giữa Kate và Tom, 2 tâm hồn cô đơn đang gặp phải những khó khăn trong cuộc sống. Kate (Emilia Clarke) là cô gái xinh đẹp nhưng chất chứa nhiều nỗi niềm không thể chia sẻ cùng ai. Cô từng trải qua một cuộc phẫu thuật thập tử nhất sinh, từ đó Kate luôn có những suy nghĩ tiêu cực và luôn trong tình trạng bế tắc, cho rằng mình là người xui xẻo nhất trên đời. Điều đó dẫn đến hàng loạt quyết định ngớ ngẩn của cô nàng. Cho đến khi cô gặp Tom (Henry Golding), cuộc sống của cô đã có thêm ánh sáng.',1);
+
+INSERT INTO Movie(Poster,Title,Director,Cast,Genre,ReleaseDate,Duration,Language,Rated,Summary,Showing) 
+VALUES('M08.jpg','KẺ ĐÂM LÉN','Rian Johnson','Daniel Craig, Chris Evans, Ana de Armas, Jamie Lee Curtis, Katherine Langford, Jaeden Martell, Christopher Plummer,…','Hài, Tâm Lý, Tội phạm','2019-11-29 00:00:00',135,'Tiếng Anh - Phụ đề Tiếng Việt','C16','Nhân dịp sinh nhật lần thứ 85 của mình, tiểu thuyết gia trinh thám nổi tiếng Harlan Thombrey đã tổ chức một buổi tiệc với đông đủ các thành viên trong gia đình. Tuy nhiên, ông Harlan bất ngờ qua đời ngay trong ngày hôm đấy. Thám tử Benoit Blanc được cử đến để điều tra vụ án và tất cả mọi người trong gia đình đều trở thành nghi phạm. Vậy trong ngôi nhà nhiều thế hệ này, ai mới chính là ‘Kẻ Đâm Lén’? Tất cả sẽ được giải đáp vào ngày 29.11 tới đây.',1);
+
+INSERT INTO Movie(Poster,Title,Director,Cast,Genre,ReleaseDate,Duration,Language,Rated,Summary,Showing) 
+VALUES('M09.jpg','OPPA, PHIỀN QUÁ NHA!','Hwang Kyung Sung','Park Jung Min, Hari Won, Nam Thư, Anh Đức, Lãnh Thanh, …','Hài, Tình cảm','2019-12-06 00:00:00',101,'Tiếng Việt - Phụ đề Tiếng Anh','C16','Ca Dao, một nữ nhân viên văn phòng bình thường, chán nản với cuộc sống hiện tại và luôn chìm đắm trong những giấc mơ mà ở đó cô được là ca sĩ. Và cuộc đời Ca Dao bỗng chốc thay đổi khi cô nàng vô tình chạm mặt Chan Y - một ngôi sao đình đám của Hàn Quốc khi anh ta vừa đến Việt Nam.',1);
+
+INSERT INTO Movie(Poster,Title,Director,Cast,Genre,ReleaseDate,Duration,Language,Rated,Summary,Showing) 
+VALUES('M10.jpg','ÔNG BẠN GĂNG-TƠ','Yong Soo','Sol Kyung-gu, Cho Jin-woong, Huh Joon-ho, Kim Sa-rang, Jin Sun-kyu','Tâm Lý','2019-12-06 00:00:00',116,'Tiếng Hàn - Phụ đề tiếng Việt','C18','Ông Bạn Găng-Tơ kể về tay giang hồ hay khoe mẽ Young-Ki với ước mơ có một cuộc sống “đỉnh cao” bằng cách thường xuyên chơi vé số trực tuyến.Trong một lần quậy phá, gã bị tòa tuyên án 150 giờ lao động công ích. Nhiệm vụ của Young-Ki chính là chăm sóc cho vị Jang-Soo - một vị luật sư nổi tiếng và giàu có nay lại bại liệt toàn thân và sắp chết sau cơn bạo bệnh.',1);
+
+INSERT INTO Movie(Poster,Title,Director,Cast,Genre,ReleaseDate,Duration,Language,Rated,Summary,Showing) 
+VALUES('M11.jpg','KẺ DU HÀNH TRÊN MÂY','Tom Harper','Eddie Redmayne, Felicity Jones, Tom Courtenay, Tim McInnerny, Phoebe Fox','Hành Động, Hồi hộp, Phiêu Lưu','2019-12-06 00:00:00',103,'Tiếng Anh - Phụ đề Tiếng Việt','C13','Dựa trên nhiều sự kiện có thật, KẺ DU HÀNH TRÊN MÂY khắc họa chuyến hành trình trên khinh khí cầu vươn tới độ cao kỷ lục chưa ai từng đạt được của nhà khoa học James Glaisher, thuộc viện Khoa học Hoàng Gia Anh cùng người cộng sự Amelia Wren - nữ phi công điều khiển khinh khí cầu chuyên nghiệp hiếm hoi của Vương quốc Anh Thế kỷ 19. Với James Glaisher, chân lý của anh là khoa học, vươn tới được những đám mây xa xăm kia, anh có thể thay đổi cuộc sống của hàng triệu người. Còn với Amelia, bầu trời bao la phía trước là mục đích sống, là cuộc phiêu lưu bất tận của cuộc đời. KẺ DU HÀNH TRÊN MÂY đánh dấu sự tái ngộ của chủ nhân tượng vàng Oscar, "phù thuỷ sinh vật huyền bí" Eddie Redmayne và bông hồng nước Anh từng được đề cử Oscar Felicity Jones 5 năm kể từ bộ phim từng khiến bao khán giả thổn thức The Theory Of Everything - Thuyết Vạn Vật.',1);
+
+INSERT INTO Movie(Poster,Title,Director,Cast,Genre,ReleaseDate,Duration,Language,Rated,Summary,Showing) 
+VALUES('M12.jpg','CLARA VÀ KHU RỪNG KỲ BÍ','Oleksandr Klymenko','','Gia đình, Hài, Hoạt Hình','2019-12-06 00:00:00',87,'Lồng tiếng','P','Clara, một cô gái trẻ và xinh đẹp sống trong xứ sở thần tiên cùng với các người lùn, những chú rồng và phù thuỷ. Một sứ mệnh cao cả được giao cho Clara và những người bạn của mình, khiến cô và mọi người cùng nhau bắt đầu một cuộc hành trình mới.',1);
+
+-- Dựng suất phim cho phim đang chiếu
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(5,1,'2019-12-11 09:20:00',0,'2D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(5,2,'2019-12-14 13:50:00',0,'2D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(5,3,'2019-12-15 15:30:00',0,'2D');
+
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(6,4,'2019-12-11 10:10:00',0,'3D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(6,5,'2019-12-14 15:40:00',0,'3D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(6,2,'2019-12-15 19:30:00',0,'2D');
+
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(7,3,'2019-12-11 12:20:00',0,'2D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(7,2,'2019-12-14 17:30:00',0,'2D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(7,1,'2019-12-15 20:00:00',0,'2D');
+
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(8,6,'2019-12-11 19:20:00',0,'4DX');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(8,5,'2019-12-14 15:10:00',0,'3D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(8,2,'2019-12-15 19:30:00',0,'4DX');
+
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(9,2,'2019-12-11 09:20:00',0,'2D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(9,2,'2019-12-14 14:30:00',0,'2D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(9,1,'2019-12-15 15:30:00',0,'2D');
+
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(10,4,'2019-12-11 18:30:00',0,'3D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(10,3,'2019-12-14 13:10:00',0,'2D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(10,3,'2019-12-15 19:00:00',0,'2D');
+
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(11,6,'2019-12-11 20:00:00',0,'4DX');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(11,1,'2019-12-14 15:40:00',0,'2D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(11,6,'2019-12-15 19:30:00',0,'4DX');
+
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(12,6,'2019-12-11 08:00:00',0,'2D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(12,1,'2019-12-14 16:40:00',0,'2D');
+INSERT INTO Showtime(MovieID,TheaterID,StartTime,NoSeatBooked,Format) VALUES(12,6,'2019-12-15 19:30:00',0,'3D');
+
+
+
+
+
+

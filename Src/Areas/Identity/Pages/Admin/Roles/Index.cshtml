@@ -1,0 +1,46 @@
+@page
+@model MovieTheater.Areas.Identity.Pages.Admin.Roles.IndexModel
+
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h1>Phân quyền</h1>
+<hr>
+
+@if (Model.Role.Any())
+{
+    <a class="btn btn-primary mb-3" asp-page="./Create" >Tạo quyền mới</a>
+
+    foreach (var role in Model.Role)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Role Id : @role.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@role.Name</h5>
+            </div>
+            <div class="card-footer">
+                <a asp-page="./Edit" asp-route-id="@role.Id" class="btn btn-primary">Chỉnh sửa</a>
+                <a asp-page="./Delete" asp-route-id="@role.Id" class="btn btn-danger">Xóa</a>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            Chưa có quyền nào
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Bấm vào nút bên dưới để tạo quyền mới
+            </h5>
+            <a class="btn btn-primary" asp-page="./Create">
+                Tạo mới
+            </a>
+        </div>
+    </div>
+}

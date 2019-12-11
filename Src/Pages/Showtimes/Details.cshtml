@@ -1,0 +1,49 @@
+@page
+@model MovieTheater.Pages.Showtimes.DetailsModel
+
+@{
+    ViewData["Title"] = "Showtime";
+}
+
+<h1>Chi tiết</h1>
+
+<div>
+    <h4>Suất chiếu</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Showtime.Movie.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Showtime.Movie.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Showtime.Theater.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Showtime.Theater.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Showtime.StartTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.getStartTimeFormatted(@Model.Showtime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Showtime.Format)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Showtime.Format)
+        </dd>
+        <dt class="col-sm-2">
+            Số vé được mua:
+        </dt>
+        <dd class="col-sm-10">
+            @Model.getNoSeatLeft(@Model.Showtime) / @Model.Showtime.Theater.NoSeat
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Showtime.ID">Chỉnh sửa</a> |
+    <a asp-page="./Index">Quay lại lịch chiếu</a>
+</div>

@@ -1,0 +1,36 @@
+@page
+@model MovieTheater.Areas.Identity.Pages.Admin.Roles.EditUsersInRole
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<h1>Chỉnh sửa</h1>
+<hr>
+
+<form method="post">
+    <div class="card">
+        <div class="card-header">
+            <h2>Thêm xóa người dùng trong quyền</h2>
+        </div>
+        <div class="card-body">
+            @for (int i = 0; i < Model.model.Count; i++)
+            {
+                <div class="form-check m-1">
+                    <input type="hidden" asp-for="@Model.model[i].UserId" />
+                    <input type="hidden" asp-for="@Model.model[i].UserName" />
+                    <input asp-for="@Model.model[i].IsSelected" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@Model.model[i].IsSelected">
+                        @Model.model[i].UserName
+                    </label>
+                </div>
+            }
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Cập nhật" class="btn btn-primary"
+                   style="width:auto" />
+            <a asp-page="./Edit" asp-route-Id="@Model.roleIdMoveBack"
+               class="btn btn-danger" style="width:auto">Hủy</a>
+        </div>
+    </div>
+</form>

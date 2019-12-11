@@ -1,0 +1,53 @@
+@page
+@model MovieTheater.Pages.Showtimes.EditModel
+
+@{
+    ViewData["Title"] = "Showtime";
+}
+
+<h1>Chỉnh sửa</h1>
+
+<h4>Suất</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Showtime.ID" />
+            <div class="form-group">
+                <label asp-for="Showtime.MovieID" class="control-label"></label>
+                <select asp-for="Showtime.MovieID" class="form-control" asp-items="@Model.MovieID"></select>
+                <span asp-validation-for="Showtime.MovieID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Showtime.TheaterID" class="control-label"></label>
+                <select asp-for="Showtime.TheaterID" class="form-control" asp-items="@Model.TheaterID"></select>
+                <span asp-validation-for="Showtime.TheaterID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Showtime.StartTime" class="control-label"></label>
+                <input asp-for="Showtime.StartTime" class="form-control" />
+                <span asp-validation-for="Showtime.StartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Showtime.Format" class="control-label"></label>
+                <select asp-for="Showtime.Format" class ="form-control">
+                    <option value="2D">2D</option>
+                    <option value="3D">3D</option>
+                    <option value="4DX">4DX</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Lưu" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Quay lại lịch chiếu</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

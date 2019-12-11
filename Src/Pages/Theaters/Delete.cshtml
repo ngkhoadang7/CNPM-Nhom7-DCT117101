@@ -1,0 +1,40 @@
+@page
+@model MovieTheater.Pages.Theaters.DeleteModel
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<h1>Xóa</h1>
+
+<h3>Bạn có chắc chắn muốn xóa</h3>
+<div>
+    <h4>Phòng chiếu</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Theater.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Theater.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Theater.NoSeat)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Theater.NoSeat)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Theater.Format)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Theater.Format)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Theater.ID" />
+        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+        <a asp-page="./Index">Quay lại danh sách phòng chiếu</a>
+    </form>
+</div>

@@ -1,0 +1,94 @@
+@page
+@model MovieTheater.Pages.Staff.ListOfTicketsModel
+
+@{
+    ViewData["Title"] = "Staff";
+}
+
+<h1>Danh sách vé</h1>
+<form>
+    <div class="form-inline mb-3">
+        <label class="mr-2">Mã lấy vé: </label>
+        <input asp-for="SearchString" class="form-control"/>
+        <input type="submit" value="Lọc" class="btn btn-primary" />
+    </div>
+</form>
+<form method="post">
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Showtime.Movie.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Showtime.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Showtime.Theater.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Seat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Showtime.Format)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].CodeToGet)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@{var i = 0;}
+@foreach (var item in Model.Ticket) 
+{
+        <tr>
+            <td>
+                <input type="hidden" asp-for="@Model.model[@i].TicketID" />
+                <input asp-for="@Model.model[@i].IsSelected" class="form-check-input" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Showtime.Movie.Title)
+            </td>
+            <td>
+                @Model.getStartTimeFormatted(item)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Showtime.Theater.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Seat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Showtime.Format)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodeToGet)
+            </td>
+            <td>
+                <a asp-page="./Getticket" asp-route-id="@item.ID">Details</a>
+            </td>
+        </tr>
+    i++;
+}
+    </tbody>
+</table>
+    <input type="submit" value="Xuất vé" class="btn btn-primary" style="float:right" />
+</form>
+@{
+    var prevDisabled = !Model.Ticket.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Ticket.HasNextPage ? "disabled" : "";
+}
+<a asp-page="./ListOfTickets"
+    asp-route-currentSearchString="@Model.SearchString"
+    asp-route-pageIndex="@(Model.Ticket.PageIndex - 1)"
+    class="btn btn-primary @prevDisabled">
+    Trước
+</a>
+<a asp-page="./ListOfTickets"
+    asp-route-currentSearchString="@Model.SearchString"
+    asp-route-pageIndex="@(Model.Ticket.PageIndex + 1)"
+    class="btn btn-primary @nextDisabled">
+    Sau
+</a>

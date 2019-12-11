@@ -1,0 +1,19 @@
+.showtime-info{
+    line-height: 2.5em;
+    display:flex;
+}
+.showtime-info_lable{
+    width: 9em;
+    font-weight: bold;
+}
+.showtime-info_content{
+    width:-webkit-fill-available; 
+}
+.showtime-poster{
+    margin: 0 auto 10px auto;
+    width:60%;
+}
+.screen-pic{
+    width:100%;
+    margin-bottom: 8rem;
+}

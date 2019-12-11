@@ -1,0 +1,81 @@
+@page
+@model MovieTheater.Pages.Tickets.IndexModel
+
+@{
+    ViewData["Title"] = "Ticket";
+}
+
+<h1>Vé đã đặt</h1>
+<form>
+    <div class="form-inline mb-3">
+        <label class="mr-2">Phim: </label>
+        <select asp-for="MovieSearch" asp-items="Model.MovieList" class="form-control">
+            <option value="">Tất cả</option>
+        </select>
+        <input type="submit" value="Lọc" class="btn btn-primary" />
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Showtime.Movie.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Showtime.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Showtime.Theater.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Seat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Showtime.Format)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].CodeToGet)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Ticket) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Showtime.Movie.Title)
+            </td>
+            <td>
+                @Model.getStartTimeFormatted(item)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Showtime.Theater.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Seat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Showtime.Format)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodeToGet)
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.Ticket.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Ticket.HasNextPage ? "disabled" : "";
+}
+<a asp-page="./Index"
+    asp-route-currentMovieSearch="@Model.MovieSearch"
+    asp-route-pageIndex="@(Model.Ticket.PageIndex - 1)"
+    class="btn btn-primary @prevDisabled">
+    Trước
+</a>
+<a asp-page="./Index"
+    asp-route-currentMovieSearch="@Model.MovieSearch"
+    asp-route-pageIndex="@(Model.Ticket.PageIndex + 1)"
+    class="btn btn-primary @nextDisabled">
+    Sau
+</a>

@@ -1,0 +1,62 @@
+@page
+@model MovieTheater.Pages.Theaters.IndexModel
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<h1>Phòng chiếu</h1>
+
+<p>
+    <a asp-page="Create">Tạo mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Theater[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Theater[0].NoSeat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Theater[0].Format)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Theater) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoSeat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Format)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Sửa</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Chi tiết</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Xóa</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.Theater.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Theater.HasNextPage ? "disabled" : "";
+}
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.Theater.PageIndex - 1)"
+   class="btn btn-primary @prevDisabled">
+    Trước
+</a>
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.Theater.PageIndex + 1)"
+   class="btn btn-primary @nextDisabled">
+    Sau
+</a>

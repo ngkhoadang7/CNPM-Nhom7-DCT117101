@@ -1,0 +1,78 @@
+@page
+@model MovieTheater.Pages.Tickets.DetailsModel
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<h1>Chi tiết</h1>
+
+<div>
+    <h4>Vé</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.Showtime.Movie.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ticket.Showtime.Movie.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.Showtime.StartTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.getStartTimeFormatted(@Model.Ticket)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.Seat)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ticket.Seat)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.Showtime.Theater.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ticket.Showtime.Theater.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.Showtime.Format)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ticket.Showtime.Format)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.CodeToGet)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ticket.CodeToGet)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.Got)
+        </dt>
+        <dd class="col-sm-10">
+            @(Html.Raw(@Model.Ticket.Got ? "Đã lấy" : "Chưa lấy"))
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.Money)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ticket.Money)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.UserID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ticket.UserID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.StaffID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ticket.StaffID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Manage">Quay lại danh sách vé</a>
+</div>

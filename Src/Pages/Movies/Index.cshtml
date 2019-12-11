@@ -1,0 +1,44 @@
+@page
+@model MovieTheater.Pages.Movies.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<link rel="stylesheet" href="~/css/Movies/Index.css" type="text/css" />
+<link rel="stylesheet" href="~/css/common.css" type="text/css" />
+
+<h1>Phim Đang Chiếu</h1>
+<hr/ class="title-hr">
+<div class="row">
+    @foreach (var item in Model.Movie) {
+        <div class="col-3 movie-item">
+            <a asp-page="./Details" asp-route-id="@item.ID">
+                <img src="Picture/@item.Poster" class="movie-poster">
+            </a>  
+            <div class="movie-info">    
+                <div class="movie-info_title">    
+                    @Html.DisplayFor(modelItem => item.Title)
+                </div>
+                <div>
+                    <b> 
+                        Thể loại: 
+                    </b>
+                        @Html.DisplayFor(modelItem => item.Genre)
+                </div>
+                <div>
+                    <b> 
+                        Thời lượng: 
+                    </b>
+                        @Html.DisplayFor(modelItem => item.Duration) phút
+                </div>
+                <div> 
+                    <b>
+                        Khởi chiếu: 
+                    </b>
+                        @Model.getDate(item)
+                </div>
+                <a asp-page="../Showtimes/Index" class="btn btn-primary float-right" asp-route-movieSearch="@item.Title">Xem lịch chiếu</a> 
+            </div>
+        </div>
+    }
+</div>

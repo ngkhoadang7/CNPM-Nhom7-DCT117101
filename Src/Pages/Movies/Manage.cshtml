@@ -1,0 +1,74 @@
+@page
+@model MovieTheater.Pages.Movies.ManageModel
+
+@{
+    ViewData["Title"] = "Admin";
+}
+<link rel="stylesheet" href="~/css/Movies/Index.css" type="text/css" />
+<link rel="stylesheet" href="~/css/common.css" type="text/css" />
+
+<h1>Phim</h1>
+<hr/>
+
+<p>
+    <a asp-page="Create">Tạo mới</a>
+</p>
+
+<form>
+    <div class="form-inline mb-3">
+        Phim: <input asp-for="@Model.MovieSearch" class="form-control"/> 
+        <input type="submit" value="Lọc" class="btn btn-primary" />
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Showing)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Movie) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @(Html.Raw(@item.Showing ? "Đang chiếu" : "Hết chiếu"))
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Sửa</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Chi tiết</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Xóa</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.Movie.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Movie.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Manage"
+   asp-route-pageIndex="@(Model.Movie.PageIndex - 1)"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Manage"
+   asp-route-pageIndex="@(Model.Movie.PageIndex + 1)"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>

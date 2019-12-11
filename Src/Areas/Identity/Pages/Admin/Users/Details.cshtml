@@ -1,0 +1,42 @@
+@page
+@model MovieTheater.Areas.Identity.Pages.Admin.Users.DetailsModel
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<h1>Chi tiết</h1>
+
+<div>
+    <h4>Người dùng</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MyUser.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MyUser.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MyUser.UserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MyUser.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MyUser.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MyUser.Email) @Html.DisplayFor(model => model.MyUser.EmailConfirmed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MyUser.PhoneNumber) 
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MyUser.PhoneNumber) @Html.DisplayFor(model => model.MyUser.PhoneNumberConfirmed)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Index">Quay về danh sách người dùng</a>
+</div>

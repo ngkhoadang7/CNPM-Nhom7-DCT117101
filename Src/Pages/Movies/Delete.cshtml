@@ -1,0 +1,82 @@
+@page
+@model MovieTheater.Pages.Movies.DeleteModel
+
+@{
+    ViewData["Title"] = "Movie";
+}
+
+<h1>Xóa</h1>
+
+<h3>Bạn có chắc chắn muốn xóa?</h3>
+<div>
+    <h4>Phim</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.Poster)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Poster)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.Director)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Director)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.Cast)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Cast)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.Genre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Genre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.ReleaseDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.ReleaseDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.Duration)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Duration)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.Language)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Language)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.Rated)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Rated)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.Summary)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Summary)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Movie.ID" />
+        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+        <a asp-page="./Index">Quay lại danh sách phim</a>
+    </form>
+</div>

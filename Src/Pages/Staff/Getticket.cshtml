@@ -1,0 +1,58 @@
+@page
+@model MovieTheater.Pages.Staff.GetticketModel
+
+@{
+    ViewData["Title"] = "Staff";
+}
+
+<h1>Chi tiết</h1>
+
+<div>
+    <h4>Vé</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.Showtime.Movie.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ticket.Showtime.Movie.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.Showtime.StartTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.getStartTimeFormatted(@Model.Ticket)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.Seat)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ticket.Seat)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.Showtime.Format)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ticket.Showtime.Format)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.Showtime.Theater.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ticket.Showtime.Theater.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.CodeToGet)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ticket.CodeToGet)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./ListOfTickets">Quay lại danh sách vé</a>
+</div>
+<form method="post" style="float:right">
+    <input type="hidden" asp-for="Ticket.ID" />
+    <input type="submit" value="Xuất vé" class="btn btn-primary" />
+</form>

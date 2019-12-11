@@ -1,0 +1,6 @@
+dt{
+    width: 8em;
+}
+dd{
+    width:-webkit-fill-available;
+}

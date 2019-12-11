@@ -1,0 +1,93 @@
+@page
+@model MovieTheater.Pages.Tickets.ManageModel
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<h1>Quản lý</h1>
+<form>
+    <div class="form-inline mb-3">
+        <label class="mr-2">Phim: </label>
+        <select asp-for="MovieSearch" asp-items="Model.MovieList" class="form-control">
+            <option value="">Tất cả</option>
+        </select>
+        <label class="mr-2">UserID: </label>
+        <input asp-for="@Model.UserSearch" class="form-control"/>
+        <label class="mr-2">StaffID: </label>
+        <input asp-for="@Model.StaffSearch" class="form-control"/>
+        <input type="submit" value="Lọc" class="btn btn-primary" />
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Showtime.Movie.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Showtime.Theater.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Showtime.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Seat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].UserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].StaffID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Ticket) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Showtime.Movie.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Showtime.Theater.Name)
+            </td>
+            <td>
+                @Model.getStartTimeFormatted(item)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Seat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StaffID)
+            </td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.ID">Chi tiết</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.Ticket.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Ticket.HasNextPage ? "disabled" : "";
+}
+<a asp-page="./Manage"
+    asp-route-currentMovieSearch="@Model.MovieSearch"
+    asp-route-currentStaffSearch="@Model.StaffSearch"
+    asp-route-currentUserSearch="@Model.UserSearch"
+    asp-route-pageIndex="@(Model.Ticket.PageIndex - 1)"
+    class="btn btn-primary @prevDisabled">
+    Trước
+</a>
+<a asp-page="./Manage"
+    asp-route-currentMovieSearch="@Model.MovieSearch"
+    asp-route-currentStaffSearch="@Model.StaffSearch"
+    asp-route-currentUserSearch="@Model.UserSearch"
+    asp-route-pageIndex="@(Model.Ticket.PageIndex + 1)"
+    class="btn btn-primary @nextDisabled">
+    Sau
+</a>
